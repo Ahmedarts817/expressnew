@@ -1,0 +1,26 @@
+.landing{
+    height:  calc(100vh - 70px);
+    position: relative;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url('https://expertreviews.b-cdn.net/sites/expertreviews/files/styles/large_teaser__660x400/public/2021/01/samsung-galaxy-a12-review-5.jpg?itok=cZXrO0-2');
+
+}
+.landing::before{
+content: "";
+position: absolute;
+width: 100%;
+height: 100%;
+top: 0;
+left: 0;
+background-color: #02020248;
+}
+h1{
+    color: rgb(255, 255, 255) !important;
+    position: relative;
+    background-color: rgba(161, 10, 10, 0.747);
+}
+.landing .container{
+    padding-top: 5em;
+    padding-left: 2em;
+}
