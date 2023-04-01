@@ -43,6 +43,11 @@ router.post('/register',async(req,res)=>{
 //    }
 // })
 
+router.get('/login',(req,res)=>{
+    res.render('login')
+})
+
+
 //Login with passport
 router.post('/login',passport.authenticate('local'),(req,res)=>{
     console.log('logged in');
