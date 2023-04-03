@@ -31,6 +31,13 @@ router.get('/addProduct',(req, res) => {
       res.render('./products/products',{arrCategories:result})
     }).catch((err)=>{console.log(err);})
   })
+  router.get('/:id',(req,res)=>{
+    Category.findOne({'products._id':`${req.params.id}`})
+    .then((result)=>{
+      const f = result.products.id(req.params.id)
+      res.render('./products/showProduct',{cat:f})
+    }).catch((err)=>{console.log(err);})
+  })
 
   router.delete('/:id',(req,res)=>{
     Category.findByIdAndDelete(req.params.id)
