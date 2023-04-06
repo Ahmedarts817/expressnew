@@ -45,5 +45,12 @@ router.get('/',(req, res) => {
     }).catch(err=>console.log(err))
   })
 
+  router.delete('/:id',(req,res)=>{
+    Category.findByIdAndDelete(req.params.id)
+    .then((result)=>{
+      const link = {'link':'/categories'}
+      res.send(link);
+    })
+  })
 
   module.exports = router;

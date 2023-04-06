@@ -34,19 +34,23 @@ router.get('/addProduct',(req, res) => {
   router.get('/:id',(req,res)=>{
     Category.findOne({'products._id':`${req.params.id}`})
     .then((result)=>{
-      const f = result.products.id(req.params.id)
-      res.render('./products/showProduct',{cat:f})
+      const product = result.products.id(req.params.id)
+      res.render('./products/showProduct',{product:product})
     }).catch((err)=>{console.log(err);})
   })
 
-  router.delete('/:id',(req,res)=>{
-    Category.findByIdAndDelete(req.params.id)
-    .then((params)=>{
-     res.json({link:'/categories'})
-    }).catch(err=>console.log(err))
+  router.delete('/:id',async (req,res)=>{
+    const doc =  await Category.findOne({'products._id':`${req.params.id}`
+    })   
+    doc.products.pull(req.params.id);
+    await  doc.save()
+
+    .then((result)=>{
+     res.json({link:'/products'})
+
+    })
+    .catch(err=>console.log(err))
   })
-
-
 
 
 module.exports = router;
