@@ -18,11 +18,11 @@ require('./databse')
 
 
 const authRouter = require('./routes/auth')
-const cartRouter = require('./routes/cart')
+const cartRouter = require('./routes/cartRouter')
 const articleRoute = require('./routes/articlesRoute');
 const categoriesRouter = require('./routes/categoriesRouter');
 const productsRouter = require('./routes/productsRouter');
-const Category = require("./models/categorySchema");
+const wishlistRouter = require('./routes/wishlistRouter')
 
 
 app.use(express.json())
@@ -64,17 +64,12 @@ app.get('/',(req,res)=>{
     res.render('admin')
   })
   
-  app.get("/addArticle", (req, res) => {
-    res.render("addArticle")
-  });
-  app.get("/addCategory", (req, res) => {
-    res.render("addCategory")
-  });
   
   app.use('/categories',categoriesRouter)
   app.use('/products',productsRouter)
   
   app.use('/articles',articleRoute);
+  app.use('/wishlist',wishlistRouter)
 
 
 app.listen(port,()=>{

@@ -2,7 +2,7 @@ const Article = require("../models/articleSchema");
 
 const article_get = (req, res) => {
     Article.find().then((result)=>{
-      res.render("articles",{arrArticle:result});
+      res.render("articles/articles",{arrArticle:result});
     }).catch((err)=>{
       console.log(err);
     })
@@ -19,7 +19,7 @@ const article_get = (req, res) => {
   const article_show = (req,res)=>{
     Article.findById(req.params.id)
     .then((result)=>{
-      res.render("details",{objArticle:result})
+      res.render("articles/details",{objArticle:result})
     })
     .catch((err)=>{console.log(err);})
   }

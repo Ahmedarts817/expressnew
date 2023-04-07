@@ -3,12 +3,11 @@ const router = express.Router();
 const Category = require("../models/categorySchema");
 
 
-router.get('/addProduct',(req, res) => {
-    Category.find().then((result)=>{
-      res.render("./products/addProduct",{arrCategories:result});
-    }).catch((err)=>{
-      console.log(err);
-    })
+  router.get('/add',(req,res)=>{
+  Category.find()
+  .then((result)=>{
+    res.render('products/addProduct',{arrCategories:result})
+  }).catch((err)=>{console.log(err)})
   })
   
   router.post('/add',(req,res)=>{

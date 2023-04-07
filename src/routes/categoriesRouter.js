@@ -6,7 +6,7 @@ const Category = require("../models/categorySchema");
 
 router.get('/',(req, res) => {
     Category.find().then((result)=>{
-      res.render("categories",{arrCategories:result});
+      res.render("categories/categories",{arrCategories:result});
     }).catch((err)=>{
       console.log(err);
     })
@@ -15,21 +15,25 @@ router.get('/',(req, res) => {
   router.post('/',(req,res)=>{
     const category = new Category(req.body);    
     category.save().then((result)=>{
-      res.redirect('/categories');
+      res.redirect('/categories/categories');
     }).catch(err=>{console.log(err);})
   })
   
+ router.get('/add',(req,res)=>{
+  res.render('categories/addCategory')
+ })
+
   router.get('/:id',(req,res)=>{
     Category.findById(req.params.id)
     .then((result)=>{
-      res.render('categoryDetails',{objCategory:result})
+      res.render('categories/categoryDetails',{objCategory:result})
     }).catch((err)=>{console.log(err);})
   })
 
   router.get('/edit/:id',(req,res)=>{
     Category.findById(req.params.id)
     .then((result)=>{
-      res.render('editCategory',{objCategory:result})
+      res.render('categories/editCategory',{objCategory:result})
     }).catch((err)=>{console.log(err);})
   })
   
