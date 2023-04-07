@@ -9,17 +9,17 @@ const{hashPassword, comparePassword} = require('../utils/helpers')
 router.post('/register',async(req,res)=>{
     const {username, email} = req.body;
     const userDb = await User.findOne({$or:[{username},{email}]});
-    if (!username ||!password || !email) {
+    if (!username || !email) {
         console.log("empty");
         res.sendStatus(400)
     }else{
         if (userDb) {
             console.log('exist');
-            res.status(401).send('exist')
+            res.redirect('/auth/login')
         } else {
             const password = hashPassword(req.body.password);
             const newUser = await User.create({username,password,email});
-            res.sendStatus(200)
+            res.redirect('/auth/login')
         }
     }
    
@@ -46,12 +46,15 @@ router.post('/register',async(req,res)=>{
 router.get('/login',(req,res)=>{
     res.render('login')
 })
+router.get('/register',(req,res)=>{
+    res.render('register')
+})
 
 
 //Login with passport
 router.post('/login',passport.authenticate('local'),(req,res)=>{
     console.log('logged in');
-    res.sendStatus(200);
+    res.redirect('/');
 })
 
 router.get('/google',passport.authenticate('google'),(req,res)=>{
@@ -67,5 +70,7 @@ router.get('/protected',(req,res)=>{
 
 router.get('/logout',(req,res)=>{
     req.session.destroy();
+    console.log('logged out');
+    res.redirect('/')
 })
 module.exports = router;
