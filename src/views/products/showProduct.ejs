@@ -24,6 +24,9 @@
         <h3><%= product.name %> </h3>
     <p><%= product.description %> </p>
     <button id="btn" data-id="<%= product.id  %>">Delete</button>
+   <button><a href="/products/edit/<%= product.id %>">Edit</a></button>
+   <button><a href="/cart">Add to Cart</a></button>
+   <button><a href="/wishlist">Add to Wishlist</a></button>
     </div>
 </div>
 <script>

@@ -51,5 +51,17 @@ const Category = require("../models/categorySchema");
     .catch(err=>console.log(err))
   })
 
+  router.get('/edit/:id',(req,res)=>{
+   const doc =  Category.find()
+    .then(doc=>
+      res.render('products/editProduct',{arrCategories:doc})
+    )
+    .catch(err=> console.log(err))
+    
+  })
+
+router.post('/edit/:id',(req,res)=>{
+
+})
 
 module.exports = router;
